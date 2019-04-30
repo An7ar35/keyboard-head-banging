@@ -1,0 +1,24 @@
+class Solution {
+public:
+    void rotate(vector<int>& nums, int k) {
+        auto shift = ( k > nums.size() ? k % nums.size() : k ); //actual shift
+        std::cout << "shift = " << shift << std::endl;
+        if( shift == 0 )
+            return;
+
+        auto queue = std::deque<int>();
+        for( auto i = 0; i < shift; ++i )
+            queue.push_back( nums.at( i ) );
+        
+        auto step  = 0;
+        
+        while( step < nums.size() ) {
+            auto i = ( step + shift ) % nums.size();
+            std::cout << "doing " << i << std::endl;
+            queue.push_back( nums.at( i ) );
+            nums.at( i ) = queue.front();
+            queue.pop_front();  
+            ++step;
+        }
+    }
+}; 
